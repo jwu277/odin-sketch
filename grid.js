@@ -12,6 +12,8 @@ const NUM_COLS = NUM_ROWS;
 const COL_WIDTH = ` ${WIDTH / NUM_COLS}px`;
 const ROW_HEIGHT = ` ${HEIGHT / NUM_ROWS}px`;
 
+const OPACITY_INC = 0.1;
+
 
 createGrid();
 
@@ -54,11 +56,13 @@ function initializeCell(cell) {
 
     cell.setAttribute("class", "cell");
     cell.addEventListener("mouseover", increaseOpacity);
+    cell.style.opacity = 0;
 
     container.appendChild(cell);
     
 }
 
 function increaseOpacity(e) {
-    e.target.style.opacity = 1;
+    const cell = e.target;
+    cell.style.opacity = Math.min(parseFloat(cell.style.opacity) + OPACITY_INC, 1);
 }
