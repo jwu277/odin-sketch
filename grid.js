@@ -3,16 +3,19 @@
 const container = document.querySelector("#container");
 const cells     = [];
 
-const WIDTH  = 500; // px
-const HEIGHT = WIDTH; // px
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", resetOpacity);
 
-const NUM_ROWS = 16;
+const HEIGHT = 450; // px
+const WIDTH  = HEIGHT; // px
+
+const NUM_ROWS = 32;
 const NUM_COLS = NUM_ROWS;
 
 const COL_WIDTH = ` ${WIDTH / NUM_COLS}px`;
 const ROW_HEIGHT = ` ${HEIGHT / NUM_ROWS}px`;
 
-const OPACITY_INC = 0.1;
+const OPACITY_INC = 0.2;
 
 
 createGrid();
@@ -65,4 +68,12 @@ function initializeCell(cell) {
 function increaseOpacity(e) {
     const cell = e.target;
     cell.style.opacity = Math.min(parseFloat(cell.style.opacity) + OPACITY_INC, 1);
+}
+
+function resetOpacity() {
+    for (let i = 0; i < NUM_ROWS; i++) {
+        for (let j = 0; j < NUM_COLS; j++) {
+            cells[i][j].style.opacity = 0;
+        }
+    }
 }
